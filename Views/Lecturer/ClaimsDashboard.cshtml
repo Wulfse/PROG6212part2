@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PROG6212.Models.Claim>
+
+@{
+    ViewData["Title"] = "Claims Dashboard";
+}
+
+<h1>Your Claims</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th> <!-- Display Claim ID -->
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Rate Per Hour</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.Id</td> <!-- Use 'Id' property -->
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.RatePerHour</td>
+                    <td>@claim.TotalAmount.ToString("C")</td> <!-- Format as currency -->
+                    <td>@claim.Status</td>
+                    <td>
+                        <!-- Action buttons to approve or reject claims -->
+                        <form asp-action="ApproveClaim" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@claim.Id" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                        <form asp-action="RejectClaim" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@claim.Id" />
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No claims available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

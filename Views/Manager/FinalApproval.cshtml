@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PROG6212.Models.Claim>
+
+@{
+    ViewData["Title"] = "Final Approval";
+}
+
+<h2>Final Approval</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Status</th>
+            <th>Supporting Document</th>
+            <th>Total Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.ClaimID</td> <!-- Ensure ClaimID is referenced correctly -->
+                <td>@claim.Status</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(claim.SupportingDocumentFilePath))
+                    {
+                        <a href="@Url.Content("~/" + claim.SupportingDocumentFilePath)" target="_blank">View Document</a>
+                    }
+                    else
+                    {
+                        <span>No Document</span>
+                    }
+                </td>
+                <td>@claim.TotalAmount.ToString("C")</td> <!-- Format TotalAmount as currency -->
+                <td>
+                    <form asp-action="FinalApproveClaim" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@claim.ClaimID" />
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form asp-action="FinalRejectClaim" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@claim.ClaimID" />
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

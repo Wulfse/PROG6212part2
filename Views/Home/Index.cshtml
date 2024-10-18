@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to your Contract Monthly Claim System</h1>
+   
+    <p>
+        <a href="@Url.Action("SubmitClaim", "Lecturer")" class="btn btn-primary">Lecturer Claim Submission</a>
+    </p>
+    <div>
+        <a asp-controller="Claims" asp-action="Index" class="btn btn-primary">Review Claims</a>
+        <a asp-controller="Claims" asp-action="FinalApproveClaim" class="btn btn-warning">Final Approval</a>
+    </div>
+</div>

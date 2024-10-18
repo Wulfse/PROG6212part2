@@ -1,0 +1,22 @@
+﻿@model PROG6212.Models.Claim
+
+<h1>Submit Claim</h1>
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="LecturerName">Lecturer Name:</label>
+        <input type="text" id="LecturerName" name="LecturerName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="HoursWorked">Hours Worked:</label>
+        <input type="number" id="HoursWorked" name="HoursWorked" step="0.01" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="RatePerHour">Rate Per Hour:</label>
+        <input type="number" id="RatePerHour" name="RatePerHour" step="0.01" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="SupportingDocument">Upload Supporting Document:</label>
+        <input type="file" id="SupportingDocument" name="SupportingDocument" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Claim</button>
+</form>
